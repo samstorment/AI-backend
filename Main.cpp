@@ -13,13 +13,19 @@ int main() {
 
 	matrix inputFile = frontend.readFile(FILENAME);
 
-	mancala.populate(inputFile);
-	// mancala.print();
-	for (int i = 1; i <= 2; i++) {
-		for (int j = 1; j <= 7; j++) {
-			mancala.update(i - 1, j - 1);
-		}
-		std::cout << std::endl;
-	}
+	int playerNum = mancala.populate(inputFile);
+	std::cout << "Player: " << playerNum << std::endl;
+	mancala.print();
 
+	mancala.update(1, 3);
+	mancala.print();
+
+	mancala.update(1, 6);
+	mancala.print();
+
+	mancala.update(2, 3);
+	mancala.print();
+
+	mancala.update(1, 2);
+	mancala.print();
 }

@@ -11,14 +11,12 @@ typedef std::vector<std::string> sarray;
 struct MancalaBoard {
 
 	matrix board;
-	// I think i'd rather just store these at the end of the board matrix rows for player 1 and 2
-	int player1Mancala{ 0 };
-	int player2Mancala{ 0 };
+	int P1Mancala{ 0 };
+	int P2Mancala{ 0 };
 
-	void populate(const matrix& cups);
-	bool update(const int& player, const int& cup);
+	int populate(const matrix& cups);
+	bool update(int player, int cup);
+	bool gameOver();
 	void print();
-
-	// need to implement Aaron's updateBoard method
 
 };

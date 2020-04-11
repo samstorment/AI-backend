@@ -1,7 +1,7 @@
 #include "FrontEndController.h"
 #include <string>
 
-matrix FrontEndController::readFile(std::string filename) {
+matrix FrontEndController::readFile(const std::string& filename) {
 	matrix processedInput;
 	sarray lines;
 	lines.reserve(5);
@@ -51,7 +51,7 @@ matrix FrontEndController::processFile(const sarray& lines) {
 	return fileData;
 }
 
-sarray FrontEndController::splitLine(std::string line, std::string delimiter) {
+sarray FrontEndController::splitLine(std::string line, const std::string& delimiter) {
 
 	sarray result;
 	size_t position = 0;
@@ -69,6 +69,7 @@ sarray FrontEndController::splitLine(std::string line, std::string delimiter) {
 	return result;
 }
 
+// convert string array to int array
 iarray FrontEndController::toIntArray(const sarray& array) {
 
 	iarray convert;
