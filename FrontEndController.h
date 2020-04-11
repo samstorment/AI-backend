@@ -12,5 +12,5 @@ struct FrontEndController {
 	matrix processFile(const sarray& lines);
 	sarray splitLine(std::string line, const std::string& delimiter);
 	iarray toIntArray(const sarray& array);
-	void writeFile(const std::string& filename);
+	void writeFile(const std::string& filename, int playerNum, int bestCup);
 };

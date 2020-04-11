@@ -6,16 +6,16 @@ matrix FrontEndController::readFile(const std::string& filename) {
 	sarray lines;
 	lines.reserve(5);
 
-	std::ifstream file(filename);
-	if (file.is_open()) {
+	std::ifstream File(filename);
+	if (File.is_open()) {
 		std::string line;
 		int i = 0;
-		while (std::getline(file, line)) {
+		while (std::getline(File, line)) {
 			lines.push_back(line.c_str());
 			// std::cout << lines[i] << std::endl;
 			i++;
 		}
-		file.close();
+		File.close();
 	}
 	return processFile(lines);
 }
@@ -79,4 +79,12 @@ iarray FrontEndController::toIntArray(const sarray& array) {
 	}
 
 	return convert;
+}
+
+
+void FrontEndController::writeFile(const std::string& filename, int playerNum, int bestCup) {
+	
+	std::ofstream File(filename);
+	File << playerNum << ", " << bestCup;
+	File.close();
 }
