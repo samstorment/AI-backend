@@ -138,11 +138,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AI.cpp" />
     <ClCompile Include="FrontEndController.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mancala.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
     <ClInclude Include="FrontEndController.h" />
     <ClInclude Include="Mancala.h" />
   </ItemGroup>

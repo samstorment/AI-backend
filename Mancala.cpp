@@ -89,6 +89,7 @@ bool MancalaBoard::gameOver() {
 
 void MancalaBoard::print() {
 
+	// P2's row start's at the end
 	std::cout << P2Mancala << " ";
 	for (int i = board[1].size() - 1; i >= 0; i--) {
 		std::cout << board[1][i] << " ";
