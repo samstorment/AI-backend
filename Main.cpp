@@ -16,11 +16,7 @@ int main() {
 	matrix inputFile = frontend.readFile(FILENAME);
 	int playerNum = mancala.populate(inputFile);
 
-	/*std::cout << "Start Board" << std::endl;
-	mancala.print();*/
-
-	int bestCup = ai.bestMove(&mancala, 1);
-
+	int bestCup = ai.bestMove(&mancala, playerNum);
 
 	// should just overwrite FILENAME, but i'm just testing
 	frontend.writeFile("output.txt", playerNum, bestCup);
