@@ -1,5 +1,27 @@
 #include "Mancala.h"
 
+MancalaBoard::MancalaBoard() {
+	P1Mancala = 0;
+	P2Mancala = 0;
+}
+
+// Copy ctor just for debugging
+MancalaBoard::MancalaBoard(const MancalaBoard& mancala) {
+	std::cout << "Mancala Board Copied!" << std::endl;
+}
+
+void MancalaBoard::init() {
+
+	for (int i = 0; i < 2; i++) {
+		iarray tempRow; 
+		for (int j = 0; j < 6; j++) {
+			tempRow.push_back(4);
+		}
+		board.push_back(tempRow);
+	}
+	P1Mancala = 0;
+	P2Mancala = 0;
+}
 
 // return the player number that the AI is
 int MancalaBoard::populate(const matrix& inputFile) {
@@ -19,14 +41,27 @@ int MancalaBoard::populate(const matrix& inputFile) {
 	else { return 2; }
 }
 
+// returns true if the player gets to go again
 bool MancalaBoard::update(int player, int cup) {
 	int piecesInCup = board[player - 1][cup - 1];
 	board[player - 1][cup - 1] = 0;
 	int lastSide = -1, lastCup = -1;
 
 	while (piecesInCup > 0) {
-		int currentCup = cup;
 		int currentSide = player == 1 ? 0 : 1;
+		int opponentSide = player == 1 ? 1 : 0;
+		int currentCup;
+
+		if (lastSide == opponentSide && lastCup == 5) {
+			board[currentSide][0]++;
+			currentCup = 1;
+			piecesInCup--;
+			lastSide = currentSide;
+			lastCup = 0;
+		}
+		else {
+			currentCup = cup;
+		}
 
 		while (currentCup < 6 && piecesInCup > 0) {
 			board[currentSide][currentCup]++;
@@ -43,7 +78,6 @@ bool MancalaBoard::update(int player, int cup) {
 			lastCup = 6;
 		} 
 		int opponentCup = 0;
-		int opponentSide = player == 1 ? 1 : 0;
 		
 		while (opponentCup < 6 && piecesInCup > 0) {
 			board[opponentSide][opponentCup]++;
@@ -53,22 +87,28 @@ bool MancalaBoard::update(int player, int cup) {
 			opponentCup++;
 		}
 	}
-
+	// capture opponent
 	if (lastSide == player - 1 && lastCup != 6 && board[lastSide][lastCup] == 1) {
 		if (player == 1) {
-			int total = board[0][lastCup] + board[1][5 - lastCup];
-			board[0][lastCup] = 0;
-			board[1][5 - lastCup] = 0;
-			P1Mancala += total;
+			if (board[1][5 - lastCup] != 0) {
+				int total = board[0][lastCup] + board[1][5 - lastCup];
+				board[0][lastCup] = 0;
+				board[1][5 - lastCup] = 0;
+				P1Mancala += total;
+			}
 		}
 		else {
-			int total = board[1][lastCup] + board[0][5 - lastCup];
-			board[1][lastCup] = 0;
-			board[0][5 - lastCup] = 0;
-			P2Mancala += total;
+			if (board[0][5 - lastCup] != 0) {
+				int total = board[1][lastCup] + board[0][5 - lastCup];
+				board[1][lastCup] = 0;
+				board[0][5 - lastCup] = 0;
+				P2Mancala += total;
+			}
 		}
 		return false;
-	} else if (lastSide == player - 1 && lastCup == 6) {
+	} 
+	// go again
+	else if (lastSide == player - 1 && lastCup == 6) {
 		return true;
 	} 
 	return false;
@@ -91,7 +131,7 @@ void MancalaBoard::print() {
 
 	// P2's row start's at the end
 	std::cout << P2Mancala << " ";
-	for (int i = board[1].size() - 1; i >= 0; i--) {
+	for (int i = int(board[1].size() - 1); i >= 0; i--) {
 		std::cout << board[1][i] << " ";
 	}
 

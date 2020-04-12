@@ -6,6 +6,6 @@
 struct AI {
 
 	int bestMove(MancalaBoard* mancala, int playerNum);
-	int minimax(MancalaBoard* mancala, const int depth, const bool isMax);
+	int minimax(MancalaBoard* mancala, const int depth, const int playerNum);
 	int alphaBeta(MancalaBoard* mancala, const int depth, const int alpha, const int beta, const bool isMax);
 };

@@ -11,9 +11,13 @@ typedef std::vector<std::string> sarray;
 struct MancalaBoard {
 
 	matrix board;
-	int P1Mancala{ 0 };
-	int P2Mancala{ 0 };
+	int P1Mancala;
+	int P2Mancala;
 
+	MancalaBoard();
+	MancalaBoard(const MancalaBoard& mancala);
+
+	void init();
 	int populate(const matrix& cups);
 	bool update(int player, int cup);
 	bool gameOver();

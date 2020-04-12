@@ -24,7 +24,7 @@ int AI::bestMove(MancalaBoard* mancala, int playerNum) {
 			mancala->update(playerNum, i + 1);
 
 			// Run minimax on the updated board state
-			int score = minimax(mancala, 0, true);
+			int score = minimax(mancala, 0, playerNum);
 
 			// reset the board to its start state so we can run minimax the next valid move
 			mancala->board = copyBoard;
@@ -42,8 +42,26 @@ int AI::bestMove(MancalaBoard* mancala, int playerNum) {
 	return bestCup;
 }
 
-// I'm just going to implement minimax first to get a better understanding of alpha-beta for later
-int AI::minimax(MancalaBoard* mancala, const int depth, const bool isMax) {
+// I'm just going to implement minimax first to get a better understanding of alpha-beta for later. Player 1 is always the maximizer
+int AI::minimax(MancalaBoard* mancala, const int depth, const int playerNum) {
+
+	if (mancala->gameOver()) {
+		// This return value is some heurisitic that evaluates how good the board state is. This current return value is a very lazy heuristic.
+		return mancala->P1Mancala - mancala->P2Mancala;
+	}
+
+	// If it is the Maximizing player
+	if (playerNum == 1) {
+		int bestScore = NEGATIVE_INFINITY;
+		for (int i = 0; i < mancala->board[playerNum - 1].size(); i++) {
+			if (mancala->board[playerNum - 1][i] != 0) {
+				bool canGoAgain = mancala->update(2, i + 1);
+			}
+		}
+	}
+
+	// STILL NEED TODO rest of the method and figure out how to work around canGoAgain
+
 
 	return 1;
 }
