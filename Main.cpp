@@ -6,7 +6,7 @@
 
 #define FILENAME "AIfile.txt"
 
-
+// To use in the frontend, build (ctrl + b) in release mode. When selecting the AI in the frontend, choose AI-backend.exe from the x64/Release folder (x86 for an x86 build)
 int main() {
 
 	MancalaBoard mancala;
@@ -14,49 +14,10 @@ int main() {
 	AI ai;
 
 	matrix inputFile = frontend.readFile(FILENAME);
+
 	int playerNum = mancala.populate(inputFile);
 
+	int bestCup = ai.bestMove(&mancala, playerNum);
 
-	std::cout << "1, 2" << std::endl;
-	mancala.update(1, 2);
-	mancala.print();
-
-	std::cout << "2, 1" << std::endl;
-	mancala.update(2, 1);
-	mancala.print();
-
-	std::cout << "1, 3" << std::endl;
-	mancala.update(1, 3);
-	mancala.print();
-
-	std::cout << "2, 1" << std::endl;
-	mancala.update(2, 1);
-	mancala.print();
-
-	std::cout << "1, 4" << std::endl;
-	mancala.update(1, 4);
-	mancala.print();
-
-	std::cout << "2, 5" << std::endl;
-	mancala.update(2, 5);
-	mancala.print();
-
-	std::cout << "1, 5" << std::endl;
-	mancala.update(1, 5);
-	mancala.print();
-
-	std::cout << "2, 5" << std::endl;
-	mancala.update(2, 5);
-	mancala.print();
-
-	std::cout << "1, 6" << std::endl;
-	mancala.update(1, 6);
-	mancala.print();
-
-
-
-	//int bestCup = ai.bestMove(&mancala, playerNum);
-
-	//// should overwrite FILENAME instead of "output.txt"
-	//frontend.writeFile("output.txt", playerNum, bestCup);
+	frontend.writeFile(FILENAME, playerNum, bestCup);
 }
