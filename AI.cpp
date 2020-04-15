@@ -126,9 +126,15 @@ int AI::alphaBeta(MancalaBoard* mancala, const int depth, int alpha, int beta, c
 
 	if (mancala->gameOver() || depth == 10) {
 
+		//What im thinking is we can use difficulty numbers 1....n each number represents a combination ( or single heuristic )
+		// or something similar
+		// currently heuristics dont do anything but return P1mancala - P2mancala
 
-		// This return value is some heurisitic that evaluates how good the board state is. This current return value is a very lazy heuristic.
-		return mancala->P1Mancala - mancala->P2Mancala;
+		/*if(difficulty == 1)
+		{
+			return .3*h1 + .8*h2 + .7*h3.... c*hn
+		}
+		*/
 	}
 
 	// If it is the Maximizing player
@@ -191,4 +197,46 @@ int AI::alphaBeta(MancalaBoard* mancala, const int depth, int alpha, int beta, c
 		}
 		return bestScore;
 	}
+}
+
+int AI::firstValidMove(MancalaBoard* mancala) {
+
+	return mancala->P1Mancala - mancala->P2Mancala;
+
+}
+
+int AI::P1MinusP2(MancalaBoard* mancala) {
+
+	return mancala->P1Mancala - mancala->P2Mancala;
+
+}
+
+int AI::howCloseToWinning(MancalaBoard* mancala) {
+
+	return mancala->P1Mancala - mancala->P2Mancala;
+
+}
+
+int AI::howCloseIsOpponent(MancalaBoard* mancala) {
+
+	return mancala->P1Mancala - mancala->P2Mancala;
+
+}
+
+int AI::stonesClose(MancalaBoard* mancala) {
+
+	return mancala->P1Mancala - mancala->P2Mancala;
+
+}
+
+int AI::stonesFar(MancalaBoard* mancala) {
+
+	return mancala->P1Mancala - mancala->P2Mancala;
+
+}
+
+int AI::stonesInMiddle(MancalaBoard* mancala) {
+
+	return mancala->P1Mancala - mancala->P2Mancala;
+
 }
