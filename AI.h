@@ -3,7 +3,16 @@
 #include "Mancala.h"
 
 struct AI {
-	int bestMove(MancalaBoard* mancala, int playerNum);
-	int minimax(MancalaBoard* mancala, const int depth, const int playerNum);
-	int alphaBeta(MancalaBoard* mancala, const int depth, int alpha, int beta, const int playerNum);
+
+	int bestCup(MancalaBoard* mancala, int playerNum);
+	double minimax(MancalaBoard* mancala, const int depth, const int playerNum);
+	double alphaBeta(MancalaBoard* mancala, const int depth, double alpha, double beta, const int playerNum);
+	double getHeuristic(MancalaBoard* mancala, int playerNum, double weights[4]);
+
+	// Heuristics
+	double findWin(MancalaBoard* mancala);
+	int p1MinusP2(MancalaBoard* mancala);
+	int p2MinusP1(MancalaBoard* mancala);
+	int countMost(MancalaBoard* mancala);
+
 };
